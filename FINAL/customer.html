@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReacHer - Find Local Services</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .header {
+            background-color: #8e24aa;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: relative;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .profile-card {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .profile-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-color: #ccc;
+        }
+
+        .profile-details h4 {
+            margin: 0 0 5px 0;
+        }
+
+        .profile-details p {
+            margin: 0;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #ddd;
+            font-size: 0.8em;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="language-selector">
+            <select id="language" onchange="translatePage()">
+                <option value="en">English</option>
+                <option value="ta">தமிழ்</option>
+                <option value="hi">हिन्दी</option>
+                <option value="te">తెలుగు</option>
+                <option value="ml">മലയാളം</option>
+                <option value="kn">ಕನ್ನಡ</option>
+            </select>
+        </div>
+        <h1 id="appTitle">ReacHer</h1>
+        <p id="tagline">Connecting You with Talented Women in Your Community</p>
+    </div>
+
+    <div class="container">
+
+        <div class="feature">
+            <h2 id="findServices">Find Services Near You</h2>
+            <input type="text" id="searchPlaceholder" placeholder="Search for services (e.g., tailoring, flowers)" style="width: 70%; padding: 8px;">
+            <button id="searchBtn">Search</button>
+            <button id="voiceBtn">Use Voice Search</button>
+        </div>
+
+        <div class="feature">
+            <h2 id="availableServices">Available Services</h2>
+
+            <div class="profile-card">
+                <div class="profile-image"></div>
+                <div class="profile-details">
+                    <h4 id="ashaTitle">Asha - Tailoring</h4>
+                    <p id="ashaDesc">Specializes in blouse stitching and saree alterations.</p>
+                    <button id="ashaContact">Contact</button>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-image"></div>
+                <div class="profile-details">
+                    <h4 id="lakshmiTitle">Lakshmi - Flower Arrangements</h4>
+                    <p id="lakshmiDesc">Creates beautiful garlands and floral decorations for events.</p>
+                    <button id="lakshmiContact">Contact</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 ReacHer. All rights reserved.</p>
+    </div>
+
+    <script>
+        const translations = {
+            ta: {
+                appTitle: "ரீச்சர்",
+                tagline: "உங்கள் சமூகத்தில் உள்ள திறமையான பெண்களுடன் உங்களை இணைக்கிறது",
+                findServices: "உங்களுக்கு அருகிலுள்ள சேவைகளைத் தேடுங்கள்",
+                searchBtn: "தேடு",
+                voiceBtn: "குரல் தேடலை பயன்படுத்தவும்",
+                availableServices: "இருப்பிலுள்ள சேவைகள்",
+                ashaTitle: "ஆஷா - தையல்",
+                ashaDesc: "உடை மாற்றம் மற்றும் புடவை திருத்தத்தில் நிபுணர்.",
+                ashaContact: "தொடர்பு கொள்ளவும்",
+                lakshmiTitle: "லட்சுமி - மலர் அலங்காரம்",
+                lakshmiDesc: "நிகழ்ச்சிகளுக்கான மலர் அலங்காரங்கள் செய்கிறார்.",
+                lakshmiContact: "தொடர்பு கொள்ளவும்"
+            },
+            hi: {
+                appTitle: "रीचहर",
+                tagline: "आपके समुदाय की प्रतिभाशाली महिलाओं से जुड़ें",
+                findServices: "अपने नज़दीकी सेवाएं खोजें",
+                searchBtn: "खोजें",
+                voiceBtn: "वॉइस सर्च का उपयोग करें",
+                availableServices: "उपलब्ध सेवाएं",
+                ashaTitle: "आशा - सिलाई",
+                ashaDesc: "ब्लाउज सिलाई और साड़ी अल्टर में विशेषज्ञ।",
+                ashaContact: "संपर्क करें",
+                lakshmiTitle: "लक्ष्मी - फूल सजावट",
+                lakshmiDesc: "कार्यक्रमों के लिए सुंदर माला और सजावट बनाती हैं।",
+                lakshmiContact: "संपर्क करें"
+            },
+            te: {
+                appTitle: "రీఛర్",
+                tagline: "మీ సమాజంలోని ప్రతిభావంతులైన మహిళలతో మిమ్మల్ని కనెక్ట్ చేస్తుంది",
+                findServices: "మీకు దగ్గరలో ఉన్న సేవలను కనుగొనండి",
+                searchBtn: "వెతకండి",
+                voiceBtn: "వాయిస్ సెర్చ్ వాడండి",
+                availableServices: "లభ్యమైన సేవలు",
+                ashaTitle: "ఆషా - టైలరింగ్",
+                ashaDesc: "బ్లౌజ్ కుట్టడం మరియు చీరలు సవరించడంలో నిపుణులు.",
+                ashaContact: "సంప్రదించండి",
+                lakshmiTitle: "లక్ష్మి - పుష్ప అలంకరణ",
+                lakshmiDesc: "కార్యక్రమాల కోసం అందమైన పూల అలంకరణలు చేస్తారు.",
+                lakshmiContact: "సంప్రదించండి"
+            },
+            ml: {
+                appTitle: "റിയച്ചർ",
+                tagline: "നിങ്ങളുടെ സമൂഹത്തിലെ കഴിവുള്ള സ്ത്രീകളുമായി നിങ്ങളെ ബന്ധിപ്പിക്കുന്നു",
+                findServices: "നിങ്ങളുടെ സമീപത്തെ സേവനങ്ങൾ കണ്ടെത്തുക",
+                searchBtn: "തിരയുക",
+                voiceBtn: "വോയ്സ് സെർച്ച് ഉപയോഗിക്കുക",
+                availableServices: "ലഭ്യമായ സേവനങ്ങൾ",
+                ashaTitle: "ആശ - ടെയിലറിംഗ്",
+                ashaDesc: "ബ്ലൗസ് സ്റ്റിച്ചിംഗിലും സാരികളുടെ പരിഷ്‌കരണത്തിലും വിദഗ്ധയാണ്.",
+                ashaContact: "ബന്ധപ്പെടുക",
+                lakshmiTitle: "ലക്ഷ്മി - പുഷ്പ അലങ്കാരങ്ങൾ",
+                lakshmiDesc: "പ്രോഗ്രാമുകൾക്കായി മനോഹരമായ പൂക്കൾ ഒരുക്കുന്നു.",
+                lakshmiContact: "ബന്ധപ്പെടുക"
+            },
+            kn: {
+                appTitle: "ರೀಚರ್",
+                tagline: "ನಿಮ್ಮ ಸಮುದಾಯದ ಪ್ರತಿಭಾವಂತ ಮಹಿಳೆಯರೊಂದಿಗೆ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ",
+                findServices: "ನಿಮ್ಮ ಹತ್ತಿರದ ಸೇವೆಗಳನ್ನು ಹುಡುಕಿ",
+                searchBtn: "ಹುಡುಕಿ",
+                voiceBtn: "ಧ್ವನಿ ಹುಡುಕಾಟ ಬಳಸಿ",
+                availableServices: "ಲಭ್ಯವಿರುವ ಸೇವೆಗಳು",
+                ashaTitle: "ಆಶಾ - ತೈಲರ್",
+                ashaDesc: "ಬ್ಲೌಸ್ ಹೊಲಿಗೆ ಮತ್ತು ಸೀರೆ ಬದಲಾವಣೆಯಲ್ಲಿ ಪರಿಣತಿ.",
+                ashaContact: "ಸಂಪರ್ಕಿಸಿ",
+                lakshmiTitle: "ಲಕ್ಷ್ಮಿ - ಹೂವಿನ ಅಲಂಕಾರ",
+                lakshmiDesc: "ಕಾರ್ಯಕ್ರಮಗಳಿಗೆ ಸುಂದರ ಹೂವಿನ ಅಲಂಕಾರ ಮಾಡುತ್ತಾರೆ.",
+                lakshmiContact: "ಸಂಪರ್ಕಿಸಿ"
+            }
+        };
+
+        function translatePage() {
+            const lang = document.getElementById('language').value;
+            const t = translations[lang] || {};
+
+            for (const key in t) {
+                const el = document.getElementById(key);
+                if (el) el.textContent = t[key];
+            }
+
+            // Handle placeholder text separately
+            const input = document.getElementById("searchPlaceholder");
+            if (lang === "ta") {
+                input.placeholder = "சேவைகளைத் தேடுங்கள் (உதா: தையல், பூக்கள்)";
+            } else if (lang === "hi") {
+                input.placeholder = "सेवाओं की खोज करें (जैसे: सिलाई, फूल)";
+            } else if (lang === "te") {
+                input.placeholder = "సేవల కోసం వెతకండి (ఉదా: కుట్టు, పూలు)";
+            } else if (lang === "ml") {
+                input.placeholder = "സേവനങ്ങൾ തിരയുക (ഉദാ: ടെയിലറിംഗ്, പൂക്കൾ)";
+            } else if (lang === "kn") {
+                input.placeholder = "ಸೇವೆಗಳಿಗಾಗಿ ಹುಡುಕಿ (ಉದಾ: ಹೊಲಿಗೆ, ಹೂಗಳು)";
+            } else {
+                input.placeholder = "Search for services (e.g., tailoring, flowers)";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

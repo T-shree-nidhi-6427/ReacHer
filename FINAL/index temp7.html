@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReacHer - Connecting Local Women Workers</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .language-select {
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 1em;
+        }
+
+        .role-buttons button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #8e24aa;
+            color: white;
+        }
+
+        .role-buttons button:hover {
+            background-color: #6a1b9a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Welcome to ReacHer!</h1>
+
+    <div>
+        <label for="language">Select Your Language:</label>
+        <select id="language" class="language-select" onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="ml">മലയാളം (Malayalam)</option>
+            <option value="te">తెలుగు (Telugu)</option>
+            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+        </select>
+        <noscript>Please enable JavaScript for language selection.</noscript>
+    </div>
+
+    <div class="role-buttons">
+        <label>Are you a:</label><br>
+        <button onclick="goToSellerPage()">Seller</button>
+        <button onclick="goToCustomerPage()">Customer</button>
+    </div>
+
+    <script>
+        function goToSellerPage() {
+            window.location.href = "seller.html";
+        }
+
+        function goToCustomerPage() {
+            window.location.href = "customer.html";
+        }
+
+        function changeLanguage(lang) {
+            console.log("Language selected:", lang);
+            // In a real application, you would use this 'lang' value
+            // to fetch and display the content in the selected language.
+            // This might involve:
+            // 1. Fetching language-specific JSON data.
+            // 2. Updating the text content of various elements on the page.
+            // For this HTML mockup, we are just logging the selected language.
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReacHer Seller - Manage Your Business</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .header {
+            background-color: #8e24aa;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: relative;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            border-bottom: 2px solid #8e24aa;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .profile-form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .profile-form input,
+        .profile-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .profile-form button,
+        .container button {
+            background-color: #8e24aa;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-list li {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-list li button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #ddd;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .government-schemes ul {
+            list-style: disc;
+            margin-left: 20px;
+        }
+
+        .government-schemes li {
+            margin-bottom: 5px;
+        }
+
+        .government-schemes a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .government-schemes a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="language-selector">
+            <label for="language" style="color: white;">🌐</label>
+            <select id="language" onchange="translatePage()">
+                <option value="en">English</option>
+                <option value="ta">தமிழ்</option>
+                <option value="hi">हिन्दी</option>
+                <option value="te">తెలుగు</option>
+                <option value="ml">മലയാളം</option>
+                <option value="kn">ಕನ್ನಡ</option>
+            </select>
+        </div>
+        <h1 id="title">ReacHer Seller</h1>
+        <p id="subtitle">Manage Your Services and Connect with Customers</p>
+    </div>
+
+    <div class="container">
+
+        <h2 class="section-title" id="profileTitle">My Profile</h2>
+        <form class="profile-form">
+            <label for="name" id="labelName">Your Name</label>
+            <input type="text" id="name" value="Asha Devi">
+            <label for="location" id="labelLocation">Location</label>
+            <input type="text" id="location" value="Madurai, Tamil Nadu">
+            <label for="contact" id="labelContact">Contact Number</label>
+            <input type="tel" id="contact" value="9876543210">
+            <label for="about" id="labelAbout">About Your Services</label>
+            <textarea id="about" rows="4">I specialize in blouse stitching and saree alterations. I also do custom designs.</textarea>
+            <button type="submit" id="updateBtn">Update Profile</button>
+        </form>
+
+        <h2 class="section-title" id="servicesTitle">My Services</h2>
+        <ul class="service-list">
+            <li>
+                <span>Blouse Stitching</span>
+                <button>Remove</button>
+            </li>
+            <li>
+                <span>Saree Alterations</span>
+                <button>Remove</button>
+            </li>
+            <li>
+                <span>Custom Designs</span>
+                <button>Remove</button>
+            </li>
+        </ul>
+        <button id="addServiceBtn">Add New Service</button>
+
+        <h2 class="section-title" id="interactionsTitle">Customer Interactions</h2>
+        <div>
+            <p id="inquiriesText">You have 3 new inquiries.</p>
+            <a href="#" id="viewInquiriesLink">View Inquiries</a>
+        </div>
+
+        <h2 class="section-title" id="schemesTitle">Government Schemes</h2>
+        <div class="government-schemes">
+            <p id="schemesText">Discover schemes that can help you grow your business:</p>
+            <ul>
+                <li><a href="#">PM Mudra Loan</a></li>
+                <li><a href="#">Stand-Up India Scheme</a></li>
+                <li><a href="#">Other Relevant Schemes</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 ReacHer. All rights reserved.</p>
+    </div>
+
+    <script>
+        const translations = {
+            ta: {
+                title: "ரீச்சர் வியாபாரி",
+                subtitle: "உங்கள் சேவைகளை நிர்வகிக்கவும் வாடிக்கையாளர்களுடன் இணைக்கவும்",
+                profileTitle: "என் சுயவிவரம்",
+                labelName: "உங்கள் பெயர்",
+                labelLocation: "இருப்பிடம்",
+                labelContact: "தொடர்பு எண்",
+                labelAbout: "உங்கள் சேவைகள் பற்றி",
+                updateBtn: "சுயவிவரத்தை புதுப்பிக்கவும்",
+                servicesTitle: "என் சேவைகள்",
+                addServiceBtn: "புதிய சேவையைச் சேர்க்கவும்",
+                interactionsTitle: "வாடிக்கையாளர் தொடர்புகள்",
+                inquiriesText: "உங்களிடம் 3 புதிய விசாரணைகள் உள்ளன.",
+                viewInquiriesLink: "விசாரணைகளை காண்க",
+                schemesTitle: "அரசு திட்டங்கள்",
+                schemesText: "உங்கள் வியாபாரத்தை வளர்க்க உதவும் திட்டங்களை கண்டறியவும்:"
+            },
+            hi: {
+                title: "रीचहर विक्रेता",
+                subtitle: "अपनी सेवाओं को प्रबंधित करें और ग्राहकों से जुड़ें",
+                profileTitle: "मेरी प्रोफ़ाइल",
+                labelName: "आपका नाम",
+                labelLocation: "स्थान",
+                labelContact: "संपर्क नंबर",
+                labelAbout: "आपकी सेवाओं के बारे में",
+                updateBtn: "प्रोफ़ाइल अपडेट करें",
+                servicesTitle: "मेरी सेवाएं",
+                addServiceBtn: "नई सेवा जोड़ें",
+                interactionsTitle: "ग्राहक संपर्क",
+                inquiriesText: "आपके पास 3 नई पूछताछ हैं।",
+                viewInquiriesLink: "पूछताछ देखें",
+                schemesTitle: "सरकारी योजनाएं",
+                schemesText: "ऐसी योजनाएं खोजें जो आपके व्यापार को बढ़ावा दे सकें:"
+            },
+            te: {
+                title: "రీఛర్ విక్రేత",
+                subtitle: "మీ సేవలను నిర్వహించండి మరియు ఖాతాదారులతో కనెక్ట్ అవ్వండి",
+                profileTitle: "నా ప్రొఫైల్",
+                labelName: "మీ పేరు",
+                labelLocation: "ప్రాంతం",
+                labelContact: "సంప్రదింపు నంబర్",
+                labelAbout: "మీ సేవల గురించి",
+                updateBtn: "ప్రొఫైల్‌ను నవీకరించండి",
+                servicesTitle: "నా సేవలు",
+                addServiceBtn: "కొత్త సేవను జోడించండి",
+                interactionsTitle: "ఖాతాదారుల పరస్పర చర్యలు",
+                inquiriesText: "మీకు 3 కొత్త విచారణలు ఉన్నాయి.",
+                viewInquiriesLink: "విచారణలను వీక్షించండి",
+                schemesTitle: "ప్రభుత్వ పథకాలు",
+                schemesText: "మీ వ్యాపారాన్ని అభివృద్ధి చేయగల పథకాలను కనుగొనండి:"
+            },
+            ml: {
+                title: "റിയച്ചർ വിൽപ്പനക്കാരൻ",
+                subtitle: "നിങ്ങളുടെ സേവനങ്ങൾ മാനേജ് ചെയ്യുക, ഉപഭോക്താക്കളുമായി ബന്ധപ്പെടുക",
+                profileTitle: "എന്റെ പ്രൊഫൈൽ",
+                labelName: "നിങ്ങളുടെ പേര്",
+                labelLocation: "സ്ഥാനം",
+                labelContact: "ബന്ധപ്പെടാനുള്ള നമ്പർ",
+                labelAbout: "നിങ്ങളുടെ സേവനങ്ങളെ കുറിച്ച്",
+                updateBtn: "പ്രൊഫൈൽ അപ്ഡേറ്റ് ചെയ്യുക",
+                servicesTitle: "എന്റെ സേവനങ്ങൾ",
+                addServiceBtn: "പുതിയ സേവനം ചേർക്കുക",
+                interactionsTitle: "ഉപഭോക്തൃ ഇടപെടലുകൾ",
+                inquiriesText: "നിങ്ങൾക്ക് 3 പുതിയ അന്വേഷണങ്ങളുണ്ട്.",
+                viewInquiriesLink: "അന്വേഷണങ്ങൾ കാണുക",
+                schemesTitle: "സർക്കാർ പദ്ധതികൾ",
+                schemesText: "നിങ്ങളുടെ ബിസിനസ്സ് വളരാൻ സഹായിക്കുന്ന പദ്ധതികൾ കണ്ടെത്തുക:"
+            },
+            kn: {
+                title: "ರೀಚರ್ ಮಾರಾಟಗಾರ",
+                subtitle: "ನಿಮ್ಮ ಸೇವೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ ಮತ್ತು ಗ್ರಾಹಕರೊಂದಿಗೆ ಸಂಪರ್ಕ ಸಾಧಿಸಿ",
+                profileTitle: "ನನ್ನ ಪ್ರೊಫೈಲ್",
+                labelName: "ನಿಮ್ಮ ಹೆಸರು",
+                labelLocation: "ಸ್ಥಳ",
+                labelContact: "ಸಂಪರ್ಕ ಸಂಖ್ಯೆ",
+                labelAbout: "ನಿಮ್ಮ ಸೇವೆಗಳ ಬಗ್ಗೆ",
+                updateBtn: "ಪ್ರೊಫೈಲ್ ನವೀಕರಿಸಿ",
+                servicesTitle: "ನನ್ನ ಸೇವೆಗಳು",
+                addServiceBtn: "ಹೊಸ ಸೇವೆ ಸೇರಿಸಿ",
+                interactionsTitle: "ಗ್ರಾಹಕರ ಸಂವಹನಗಳು",
+                inquiriesText: "ನಿಮ್ಮಲ್ಲಿ 3 ಹೊಸ ವಿಚಾರಣೆಗಳಿವೆ.",
+                viewInquiriesLink: "ವಿಚಾರಣೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ",
+                schemesTitle: "ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು",
+                schemesText: "ನಿಮ್ಮ ವ್ಯವಹಾರವನ್ನು ಬೆಳೆಸಲು ಸಹಾಯ ಮಾಡುವ ಯೋಜನೆಗಳನ್ನು ಕಂಡುಹಿಡಿಯಿರಿ:"
+            }
+        };
+
+        function translatePage() {
+            const lang = document.getElementById('language').value;
+            const t = translations[lang] || {};
+
+            for (const id in t) {
+                const el = document.getElementById(id);
+                if (el) el.textContent = t[id];
+            }
+        }
+    </script>
+
+</body>
+
+</html>
